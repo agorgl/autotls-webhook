@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Chart.Name }}
+spec:
+  commonName: {{ .Chart.Name }}.svc.cluster.local
+  secretName: {{ .Chart.Name }}-tls
+  dnsNames:
+    - {{ .Chart.Name }}.{{ .Release.Namespace }}.svc
+  issuerRef:
+    name: local-ca-issuer
+    kind: ClusterIssuer
